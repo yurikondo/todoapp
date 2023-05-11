@@ -3,11 +3,12 @@ const app = express();
 const taskRoute = require("./routers/tasks");
 const connectDB = require("./db/connect");
 require("dotenv").config();
+app.use(express.json());
 
 const PORT = 4000;
 
 //ルーティング設定
-app.use("/api/v1", taskRoute);
+app.use("/api/v1/tasks", taskRoute);
 
 const start = async () => {
   try {
