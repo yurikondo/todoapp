@@ -30,8 +30,17 @@ const getSingleTask = async (req, res) => {
   }
 };
 
-const updateTask = (req, res) => {
-  res.send("ある特定のタスクを更新");
+const updateTask = async (req, res) => {
+  try {
+    const updateTask = await Task.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      { new: true }
+    );
+    return res.status(200).json(updateTask);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 };
 
 const deleteTask = (req, res) => {
