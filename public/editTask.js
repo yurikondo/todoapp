@@ -15,6 +15,9 @@ const showTask = async () => {
     const { _id, completed, name } = task;
     taskIdDOM.textContent = _id;
     taskNameDOM.value = name;
+    if (completed) {
+      taskECompletedDOM.checked = true;
+    }
   } catch (err) {
     console.log(err);
   }
@@ -29,7 +32,7 @@ editFormDOM.addEventListener("submit", async (e) => {
     taskCompleted = taskECompletedDOM.checked;
     const { data: task } = await axios.patch(`/api/v1/tasks/${id}`, {
       name: taskName,
-      completed: true,
+      completed: taskCompleted,
     });
     formAlertDOM.style.display = "block";
     formAlertDOM.textContent = "編集に成功しました";
