@@ -35,6 +35,7 @@ const updateTask = async (req, res) => {
     const updateTask = await Task.findOneAndUpdate(
       { _id: req.params.id },
       req.body,
+      // 更新後のドキュメントを取得
       { new: true }
     );
     return res.status(200).json(updateTask);
